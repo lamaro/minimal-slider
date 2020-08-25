@@ -1,14 +1,8 @@
-
-//Slider
-
-
 const main = () => {
-
     //Parámetros
     let slideIndex = 1;
     let interval = 6000;
     let timer = null;
-
     const initBullets = () => {
         const slides = document.querySelectorAll('.slide');
         const bulletWrapper = document.querySelector('.bullets_wrapper');
@@ -19,7 +13,6 @@ const main = () => {
             bulletWrapper.append(dot)
         }
     }
-
     const changeSlide = slideActual => {
         const slides = document.querySelectorAll('.slide');
         slides.forEach(slide => {
@@ -31,7 +24,6 @@ const main = () => {
             }
         });
     }
-
     const changleBullet = bulletActual => {
         const bulletsCircles = document.querySelectorAll('.bullet');
         bulletsCircles.forEach(circle => {
@@ -42,7 +34,6 @@ const main = () => {
             }
         });
     }
-
     const moverSlide = () => {
         const slides = document.querySelectorAll('.slide');
         if (slideIndex >= slides.length) {
@@ -53,7 +44,6 @@ const main = () => {
         changeSlide(slideIndex);
         changleBullet(slideIndex)
     }
-
     const handleBulletsClick = () => {
         const bullets = document.querySelectorAll('.handleSlide');
         bullets.forEach(bullet => {
@@ -66,16 +56,12 @@ const main = () => {
             })
         });
     }
-
     const sliderMain = () => {
         initBullets();
         changeSlide(slideIndex);
         timer = setInterval(() => moverSlide(), interval);
         handleBulletsClick();
     }
-
     sliderMain();
-
 }
-
 main();
