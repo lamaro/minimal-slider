@@ -32,7 +32,7 @@ const main = () => {
             }
         });
     }
-    const moverSlide = (slides) => {
+    const moverSlide = slides => {
         if (slideIndex >= slides.length) {
             slideIndex = 1;
         } else {
