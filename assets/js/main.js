@@ -3,8 +3,7 @@ const main = () => {
     let slideIndex = 1;
     let interval = 6000;
     let timer = null;
-    const initBullets = () => {
-        const slides = document.querySelectorAll('.slide');
+    const initBullets = slides => {
         const bulletWrapper = document.querySelector('.bullets_wrapper');
         for (let index = 1; index <= slides.length; index++) {
             let dot = document.createElement('span');
@@ -13,8 +12,7 @@ const main = () => {
             bulletWrapper.append(dot)
         }
     }
-    const changeSlide = slideActual => {
-        const slides = document.querySelectorAll('.slide');
+    const changeSlide = (slideActual, slides) => {
         slides.forEach(slide => {
             if (slide.dataset.slide == slideActual) {
                 slide.classList.add('active');
@@ -34,33 +32,33 @@ const main = () => {
             }
         });
     }
-    const moverSlide = () => {
-        const slides = document.querySelectorAll('.slide');
+    const moverSlide = (slides) => {
         if (slideIndex >= slides.length) {
             slideIndex = 1;
         } else {
             slideIndex++;
         }
-        changeSlide(slideIndex);
+        changeSlide(slideIndex, slides);
         changleBullet(slideIndex)
     }
-    const handleBulletsClick = () => {
+    const handleBulletsClick = slides => {
         const bullets = document.querySelectorAll('.handleSlide');
         bullets.forEach(bullet => {
             bullet.addEventListener('click', (e) => {
                 e.preventDefault();
                 window.clearInterval(timer);
-                timer = setInterval(() => moverSlide(), interval);
-                changeSlide(bullet.dataset.slide)
+                timer = setInterval(() => moverSlide(slides), interval);
+                changeSlide(bullet.dataset.slide, slides)
                 changleBullet(bullet.dataset.slide)
             })
         });
     }
     const sliderMain = () => {
-        initBullets();
-        changeSlide(slideIndex);
-        timer = setInterval(() => moverSlide(), interval);
-        handleBulletsClick();
+        const slides = document.querySelectorAll('.slide');
+        initBullets(slides);
+        changeSlide(slideIndex, slides);
+        timer = setInterval(() => moverSlide(slides), interval);
+        handleBulletsClick(slides);
     }
     sliderMain();
 }
